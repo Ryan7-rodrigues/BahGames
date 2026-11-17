@@ -1,91 +1,57 @@
 package model;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
- * Classe que representa o pedido de um conjunto de jogos
+ * Classe que representa a compra direta de um jogo por um usuário.
  * 
  * @author Ryan
  * @version 1.0
- * @since 10/11/2026
+ * @date 17/11/2026
  */
 public class Compra {
     private Integer idCompra;
     private Usuario usuario;
+    private Jogo jogo;
+    private Double valorPago;
     private LocalDateTime dataCompra;
-    private Double valorTotal;
-    private List<ItemCompra> itens = new ArrayList<>();
 
     /**
-     * Construtor padrão inicializando o valor total 0
+     * Construtor padrão
      */
     public Compra() {
-        this.valorTotal = 0.0;
     }
 
     /**
-     * Construtor para registrar nova compra associada a um usuário
+     * Construtor para registrar uma nova compra
      * 
-     * @param usuario Usuário realizador da compra
+     * @param usuario Usuário que está comprando o jogo
+     * @param jogo Jogo adquirido
      */
-    public Compra(Usuario usuario) {
+    public Compra(Usuario usuario, Jogo jogo) {
         this.usuario = usuario;
+        this.jogo = jogo;
+        this.valorPago = jogo.getPreco();
         this.dataCompra = LocalDateTime.now();
-        this.valorTotal = 0.0;
     }
 
     /**
      * Construtor completo
      * 
-     * @param idCompra Identificador do pedido
-     * @param usuario Comprador
-     * @param dataCompra Data e hora da transação
-     * @param valorTotal Valor total acumulado
+     * @param idCompra
+     * @param usuario
+     * @param jogo 
+     * @param valorPago 
+     * @param dataCompra
      */
-    public Compra(Integer idCompra, Usuario usuario, LocalDateTime dataCompra, Double valorTotal) {
+    public Compra(Integer idCompra, Usuario usuario, Jogo jogo, Double valorPago, LocalDateTime dataCompra) {
         this.idCompra = idCompra;
         this.usuario = usuario;
+        this.jogo = jogo;
+        this.valorPago = valorPago;
         this.dataCompra = dataCompra;
-        this.valorTotal = valorTotal;
     }
 
-    /**
-     * Adiciona um jogo à lista de itens e recalcula o total da compra
-     * 
-     * @param jogo a ser adicionado
-     */
-    public void adicionarItem(Jogo jogo) {
-        ItemCompra item = new ItemCompra(jogo, jogo.getPreco());
-        this.itens.add(item);
-        recalcularTotal();
-    }
-
-    /**
-     * Remove um item da lista e recalcula o total
-     * 
-     * @param item a ser removido
-     */
-    public void removerItem(ItemCompra item) {
-        this.itens.remove(item);
-        recalcularTotal();
-    }
-
-    /**
-     * Método para o somatório de valores
-     */
-    private void recalcularTotal() {
-        this.valorTotal = 0.0;
-        for (ItemCompra item : itens) {
-            this.valorTotal += item.getPrecoPago();
-        }
-    }
-
-    /**
-     * Getters e Setters
-     * @return
-     */
     public Integer getIdCompra() {
         return idCompra;
     }
@@ -102,28 +68,27 @@ public class Compra {
         this.usuario = usuario;
     }
 
+    public Jogo getJogo() {
+        return jogo;
+    }
+
+    public void setJogo(Jogo jogo) {
+        this.jogo = jogo;
+    }
+
+    public Double getValorPago() {
+        return valorPago;
+    }
+
+    public void setValorPago(Double valorPago) {
+        this.valorPago = valorPago;
+    }
+
     public LocalDateTime getDataCompra() {
         return dataCompra;
     }
 
     public void setDataCompra(LocalDateTime dataCompra) {
         this.dataCompra = dataCompra;
-    }
-
-    public Double getValorTotal() {
-        return valorTotal;
-    }
-
-    public void setValorTotal(Double valorTotal) {
-        this.valorTotal = valorTotal;
-    }
-
-    public List<ItemCompra> getItens() {
-        return itens;
-    }
-
-    public void setItens(List<ItemCompra> itens) {
-        this.itens = itens;
-        recalcularTotal();
     }
 }
