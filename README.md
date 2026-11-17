@@ -21,5 +21,5 @@ Jogadores de pc de todas as faixas etárias que buscam uma plataforma leve para 
 * **Gestão de Catálogo (Jogos e Categorias):** CRUD completo para cadastrar, atualizar, listar e remover jogos e seus respectivos gêneros/categorias.
 * **Loja com Filtros Otimizados:** Consulta personalizada de jogos disponíveis por título e categoria.
 * **Compra Direta e Biblioteca Pessoal:** Aquisição simplificada de jogos em um clique, vinculando automaticamente os títulos comprados à biblioteca do usuário logado.
-* **Relatórios Gerenciais:** Geração de relatórios em PDF via JasperReports com o histórico de vendas e o catálogo de jogos[cite: 1, 2].
+* **Relatórios Gerenciais:** Geração de relatórios em PDF via JasperReports com o histórico de vendas e o catálogo de jogos.
 
