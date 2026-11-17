@@ -2,7 +2,7 @@ package model;
 
 /**
  * Enumeração que define os perfis de acesso do sistema (Administrador ou
- * Cliente).
+ * Cliente)
  * 
  * @author Ryan
  * @version 1.0
