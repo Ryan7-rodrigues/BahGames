@@ -24,7 +24,7 @@ public class Jogo {
 	}
 
 	/**
-	 * Construtor para inclusão de novos jogos.
+	 * Construtor para inclusão de novos jogos
 	 * 
 	 * @param titulo         Título do jogo
 	 * @param descricao      descrição detalhada

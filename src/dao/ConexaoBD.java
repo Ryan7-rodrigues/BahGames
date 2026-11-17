@@ -12,9 +12,9 @@ import java.sql.SQLException;
  * @since 10/11/2026
  */
 public class ConexaoBD {
-    private static final String URL = "jdbc:mysql://localhost:3306/bah_games_db?useSSL=false&serverTimezone=UTC";
+	private static final String URL = "jdbc:mysql://localhost:3306/bah_games_db?useSSL=false&serverTimezone=UTC";
     private static final String USER = "root";
-    private static final String PASSWORD = "";
+    private static final String PASSWORD = "ryan1202";
 
     /**
      * Abre e retorna uma nova conexão com o banco de dados local
