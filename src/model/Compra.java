@@ -5,9 +5,9 @@ import java.time.LocalDateTime;
 /**
  * Classe que representa a compra direta de um jogo por um usuário.
  * 
- * @author Ryan
+ * @author Nicolas
  * @version 1.0
- * @date 17/11/2026
+ * @since 17/11/2026
  */
 public class Compra {
     private Integer idCompra;

@@ -48,9 +48,9 @@ INSERT INTO categoria (nome, descricao) VALUES
 ('Indie', 'Jogos independentes com mecânicas criativas e inovadoras.');
 
 INSERT INTO jogo (titulo, descricao, preco, data_lancamento, id_categoria) VALUES 
-('CyberPampa 2077', 'RPG futurista ambientado nas terras do sul.', 149.90, '2025-11-10', 1),
-('Farrapos: A Batalha', 'Jogo de ação histórica com combates épicos.', 79.90, '2024-09-20', 2),
-('EA Sports FC 26', 'Simulador realista de futebol com ligas mundiais.', 249.00, '2025-09-26', 3),
+('CyberPunk 2077', 'RPG futurista: uma distopia em 2077', 149.90, '2025-11-10', 1),
+('Lego: Jairo Neto', 'Jogo lego que conta a história de Jairo.', 79.90, '2024-09-20', 2),
+('EA Sports FC 26', 'Simulador de futebol com ligas mundiais.', 249.00, '2025-09-26', 3),
 ('Hollow Knight', 'Aventura sombria em um vasto reino subterrâneo de insetos.', 46.99, '2017-02-24', 4),
 ('Stardew Valley', 'Simulador de fazenda e vida no campo.', 24.99, '2016-02-26', 4);
 

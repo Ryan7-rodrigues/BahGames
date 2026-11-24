@@ -6,7 +6,7 @@ package model;
  * 
  * @author Ryan
  * @version 1.0
- * @date 03/11/2026
+ * @since 03/11/2026
  */
 public enum TipoPerfil {
 	ADMINISTRADOR, CLIENTE
