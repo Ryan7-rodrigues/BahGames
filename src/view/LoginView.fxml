@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="CENTER" spacing="14.0" style="-fx-background-color: #171a21;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.LoginController">
+    <padding>
+        <Insets bottom="30.0" left="35.0" right="35.0" top="30.0" />
+    </padding>
+    <children>
+        <ImageView fitHeight="90.0" fitWidth="90.0" preserveRatio="true">
+            <image>
+                <Image url="@../imgs/logo_bahgames.png" />
+            </image>
+        </ImageView>
+        <Label text="BAH GAMES" textFill="#ff7a00">
+            <font><Font name="System Bold" size="26.0" /></font>
+        </Label>
+        <Label text="Entre com sua conta para continuar" textFill="#c7d5e0" />
+        
+        <TextField fx:id="txtEmail" promptText="E-mail (ex: admin@bahgames.com)" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-prompt-text-fill: #8f98a0; -fx-padding: 10;" />
+        <PasswordField fx:id="txtSenha" promptText="Senha (ex: 1234)" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-prompt-text-fill: #8f98a0; -fx-padding: 10;" />
+        
+        <Button maxWidth="Infinity" onAction="#handleEntrar" style="-fx-background-color: #ff7a00; -fx-text-fill: white; -fx-font-weight: bold; -fx-padding: 10; -fx-cursor: hand;" text="ENTRAR" />
+        <Label fx:id="lblMensagem" textFill="#ff4d4d" wrapText="true" />
+    </children>
+</VBox>

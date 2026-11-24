@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.6.final using JasperReports Library version 6.2.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_vendas" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="a74969cd-9497-40e0-b307-c49283a5c960">
+	<queryString>
+		<![CDATA[SELECT cp.id_compra, u.nome AS cliente, j.titulo AS jogo, cp.valor_pago, cp.data_compra FROM compra cp INNER JOIN usuario u ON cp.id_usuario = u.id_usuario INNER JOIN jogo j ON cp.id_jogo = j.id_jogo ORDER BY cp.id_compra]]>
+	</queryString>
+	<field name="id_compra" class="java.lang.Integer"/>
+	<field name="cliente" class="java.lang.String"/>
+	<field name="jogo" class="java.lang.String"/>
+	<field name="valor_pago" class="java.math.BigDecimal"/>
+	<field name="data_compra" class="java.sql.Timestamp"/>
+	<title>
+		<band height="55">
+			<staticText>
+				<reportElement x="0" y="10" width="555" height="35" uuid="c83c2fb1-d3a1-4de9-bc36-d941b9c7ef37"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="20" isBold="true" isItalic="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Vendas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="28">
+			<staticText>
+				<reportElement x="0" y="0" width="45" height="28" uuid="e02fc876-2af8-4767-be02-f9e0dca484b0"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[id]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="45" y="0" width="160" height="28" uuid="272ce6b1-1c1c-4dfa-993c-90f3a0469d92"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[cliente]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="205" y="0" width="170" height="28" uuid="e4768c8d-4b65-4238-97ee-04fdb2027351"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[jogo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="375" y="0" width="80" height="28" uuid="ce005795-0fc7-4d32-8039-bffa8659b619"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[valor_pago]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="455" y="0" width="100" height="28" uuid="01cf4e13-acd6-47da-9752-561e98c16025"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="11" isBold="true"/>
+				</textElement>
+				<text><![CDATA[data_compra]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25">
+			<textField>
+				<reportElement x="0" y="0" width="45" height="25" uuid="3912c43f-1720-4202-bdcd-ddadd5b8064b"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{id_compra}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="45" y="0" width="160" height="25" uuid="2c8d9ef0-27ed-4a53-bc6d-b193048a17cf"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{cliente}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="205" y="0" width="170" height="25" uuid="cf2ecb36-ee24-4c2b-9e02-843da28056e8"/>
+				<box leftPadding="5">
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{jogo}]]></textFieldExpression>
+			</textField>
+			<textField pattern="R$ #,##0.00">
+				<reportElement x="375" y="0" width="80" height="25" uuid="fb022a9f-79c8-4480-bada-cc555d472232"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{valor_pago}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy HH:mm">
+				<reportElement x="455" y="0" width="100" height="25" uuid="6e11d3c4-e474-4015-ab9e-c8c003addcf9"/>
+				<box>
+					<pen lineWidth="1.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle"/>
+				<textFieldExpression><![CDATA[$F{data_compra}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

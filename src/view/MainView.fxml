@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane prefHeight="680.0" prefWidth="1120.0" style="-fx-background-color: #1b2838;" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.MainController">
+    
+    <!-- MENU LATERAL ESQUERDO -->
+    <left>
+        <VBox prefWidth="230.0" spacing="10.0" style="-fx-background-color: #171a21; -fx-padding: 20;">
+            <children>
+                <HBox alignment="CENTER_LEFT" spacing="10.0">
+                    <ImageView fitHeight="42.0" fitWidth="42.0" preserveRatio="true">
+                        <image><Image url="@../imgs/logo_bahgames.png" /></image>
+                    </ImageView>
+                    <VBox>
+                        <Label text="BAH GAMES" textFill="#ff7a00"><font><Font name="System Bold" size="18.0" /></font></Label>
+                        <Label text="Plataforma PC" textFill="#8f98a0"><font><Font size="11.0" /></font></Label>
+                    </VBox>
+                </HBox>
+                
+                <Separator style="-fx-opacity: 0.2;" />
+                
+                <Button maxWidth="Infinity" onAction="#mostrarLoja" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="🛒  Loja (Catálogo)" />
+                <Button maxWidth="Infinity" onAction="#mostrarBiblioteca" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="📚  Minha Biblioteca" />
+                
+                <Label text="ADMINISTRAÇÃO" textFill="#8f98a0"><VBox.margin><Insets top="15.0" /></VBox.margin><font><Font name="System Bold" size="11.0" /></font></Label>
+                <Button fx:id="btnMenuJogos" maxWidth="Infinity" onAction="#mostrarCrudJogos" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="🎮  Gerenciar Jogos" />
+                <Button fx:id="btnMenuUsuarios" maxWidth="Infinity" onAction="#mostrarCrudUsuarios" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="👤  Gerenciar Usuários" />
+                
+                <Label text="RELATÓRIOS (PDF)" textFill="#8f98a0"><VBox.margin><Insets top="15.0" /></VBox.margin><font><Font name="System Bold" size="11.0" /></font></Label>
+                <Button maxWidth="Infinity" onAction="#gerarRelatorioJogos" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="📄  Catálogo de Jogos" />
+                <Button maxWidth="Infinity" onAction="#gerarRelatorioVendas" style="-fx-background-color: #2a475e; -fx-text-fill: white; -fx-alignment: CENTER_LEFT; -fx-padding: 10;" text="📊  Histórico de Vendas" />
+                
+                <Region VBox.vgrow="ALWAYS" />
+                <Separator style="-fx-opacity: 0.2;" />
+                <Label fx:id="lblUsuarioLogado" text="Olá, Usuário" textFill="white" wrapText="true"><font><Font name="System Bold" size="13.0" /></font></Label>
+                <Button maxWidth="Infinity" onAction="#handleSair" style="-fx-background-color: #c0392b; -fx-text-fill: white; -fx-font-weight: bold;" text="Sair" />
+            </children>
+        </VBox>
+    </left>
+
+    <!-- ÁREA CENTRAL COM OS PAINÉIS EMPILHADOS -->
+    <center>
+        <StackPane style="-fx-padding: 25;">
+            <children>
+                
+                <!-- 1. PAINEL LOJA (CONSULTA PERSONALIZADA 1 + COMPRA DIRETA) -->
+                <VBox fx:id="paneLoja" spacing="15.0">
+                    <Label text="Explorar Catálogo de Jogos" textFill="white"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    <HBox alignment="CENTER_LEFT" spacing="10.0" style="-fx-background-color: #171a21; -fx-padding: 12; -fx-background-radius: 6;">
+                        <TextField fx:id="txtFiltroTitulo" prefWidth="280.0" promptText="Buscar por título..." />
+                        <ComboBox fx:id="cbFiltroCategoria" prefWidth="200.0" promptText="Todas as Categorias" />
+                        <TextField fx:id="txtFiltroPrecoMax" prefWidth="130.0" promptText="Preço máx. (R$)" />
+                        <Button onAction="#filtrarLoja" style="-fx-background-color: #ff7a00; -fx-text-fill: white; -fx-font-weight: bold;" text="Filtrar" />
+                        <Button onAction="#limparFiltrosLoja" text="Limpar" />
+                    </HBox>
+                    <TableView fx:id="tblLoja" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colLojaTitulo" prefWidth="240.0" text="Título" />
+                            <TableColumn fx:id="colLojaCategoria" prefWidth="150.0" text="Categoria" />
+                            <TableColumn fx:id="colLojaDescricao" prefWidth="340.0" text="Descrição" />
+                            <TableColumn fx:id="colLojaPreco" prefWidth="110.0" text="Preço (R$)" />
+                        </columns>
+                    </TableView>
+                    <HBox alignment="CENTER_RIGHT">
+                        <Button onAction="#comprarJogoSelecionado" style="-fx-background-color: #5c7e10; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 14px; -fx-padding: 10 25;" text="Comprar Jogo Selecionado" />
+                    </HBox>
+                </VBox>
+
+                <!-- 2. PAINEL BIBLIOTECA (CONSULTA PERSONALIZADA 2) -->
+                <VBox fx:id="paneBiblioteca" spacing="15.0" visible="false">
+                    <Label text="Minha Biblioteca de Jogos" textFill="white"><font><Font name="System Bold" size="22.0" /></font></Label>
+                    <Label text="Jogos já adquiridos por você na plataforma:" textFill="#c7d5e0" />
+                    <TableView fx:id="tblBiblioteca" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colBibTitulo" prefWidth="260.0" text="Jogo" />
+                            <TableColumn fx:id="colBibCategoria" prefWidth="160.0" text="Categoria" />
+                            <TableColumn fx:id="colBibLancamento" prefWidth="140.0" text="Lançamento" />
+                            <TableColumn fx:id="colBibDescricao" prefWidth="300.0" text="Descrição" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- 3. PAINEL GERENCIAR JOGOS + CATEGORIAS (CRUD 1 e CRUD 2) -->
+                <HBox fx:id="paneCrudJogos" spacing="20.0" visible="false">
+                    <!-- Lado Esquerdo: CRUD Jogos -->
+                    <VBox spacing="10.0" HBox.hgrow="ALWAYS">
+                        <Label text="Gerenciar Jogos (CRUD)" textFill="white"><font><Font name="System Bold" size="20.0" /></font></Label>
+                        <GridPane hgap="10.0" vgap="8.0">
+                            <TextField fx:id="txtJogoTitulo" promptText="Título do Jogo" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                            <ComboBox fx:id="cbJogoCategoria" prefWidth="200.0" promptText="Categoria" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                            <TextField fx:id="txtJogoPreco" promptText="Preço (ex: 59.90)" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                            <DatePicker fx:id="dpJogoLancamento" promptText="Data Lançamento" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                            <TextField fx:id="txtJogoDescricao" promptText="Descrição / Sinopse" GridPane.columnIndex="0" GridPane.columnSpan="2" GridPane.rowIndex="2" />
+                        </GridPane>
+                        <HBox spacing="10.0">
+                            <Button onAction="#salvarJogo" style="-fx-background-color: #5c7e10; -fx-text-fill: white; -fx-font-weight: bold;" text="Salvar Novo" />
+                            <Button onAction="#atualizarJogo" style="-fx-background-color: #ff7a00; -fx-text-fill: white; -fx-font-weight: bold;" text="Atualizar Selecionado" />
+                            <Button onAction="#excluirJogo" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="Excluir" />
+                            <Button onAction="#limparFormJogo" text="Limpar" />
+                        </HBox>
+                        <TableView fx:id="tblCrudJogos" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colCrudJogoId" prefWidth="45.0" text="ID" />
+                                <TableColumn fx:id="colCrudJogoTitulo" prefWidth="190.0" text="Título" />
+                                <TableColumn fx:id="colCrudJogoCat" prefWidth="120.0" text="Categoria" />
+                                <TableColumn fx:id="colCrudJogoPreco" prefWidth="90.0" text="Preço" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+
+                    <Separator orientation="VERTICAL" />
+
+                    <!-- Lado Direito: CRUD Categorias -->
+                    <VBox prefWidth="290.0" spacing="10.0">
+                        <Label text="Categorias (CRUD)" textFill="#ff7a00"><font><Font name="System Bold" size="18.0" /></font></Label>
+                        <TextField fx:id="txtCatNome" promptText="Nome da Categoria" />
+                        <TextField fx:id="txtCatDescricao" promptText="Descrição curta" />
+                        <HBox spacing="6.0">
+                            <Button onAction="#salvarCategoria" style="-fx-background-color: #5c7e10; -fx-text-fill: white;" text="Salvar" />
+                            <Button onAction="#atualizarCategoria" style="-fx-background-color: #ff7a00; -fx-text-fill: white;" text="Editar" />
+                            <Button onAction="#excluirCategoria" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="Excluir" />
+                        </HBox>
+                        <TableView fx:id="tblCrudCategorias" VBox.vgrow="ALWAYS">
+                            <columns>
+                                <TableColumn fx:id="colCrudCatId" prefWidth="45.0" text="ID" />
+                                <TableColumn fx:id="colCrudCatNome" prefWidth="220.0" text="Nome" />
+                            </columns>
+                        </TableView>
+                    </VBox>
+                </HBox>
+
+                <!-- 4. PAINEL GERENCIAR USUÁRIOS (CRUD 3) -->
+                <VBox fx:id="paneCrudUsuarios" spacing="12.0" visible="false">
+                    <Label text="Gerenciar Usuários (CRUD)" textFill="white"><font><Font name="System Bold" size="20.0" /></font></Label>
+                    <HBox spacing="10.0">
+                        <TextField fx:id="txtUserNome" prefWidth="200.0" promptText="Nome completo" />
+                        <TextField fx:id="txtUserEmail" prefWidth="220.0" promptText="E-mail" />
+                        <PasswordField fx:id="txtUserSenha" prefWidth="140.0" promptText="Senha" />
+                        <ComboBox fx:id="cbUserPerfil" prefWidth="160.0" promptText="Perfil" />
+                    </HBox>
+                    <HBox spacing="10.0">
+                        <Button onAction="#salvarUsuario" style="-fx-background-color: #5c7e10; -fx-text-fill: white; -fx-font-weight: bold;" text="Salvar Novo" />
+                        <Button onAction="#atualizarUsuario" style="-fx-background-color: #ff7a00; -fx-text-fill: white; -fx-font-weight: bold;" text="Atualizar Selecionado" />
+                        <Button onAction="#excluirUsuario" style="-fx-background-color: #c0392b; -fx-text-fill: white;" text="Excluir" />
+                        <Button onAction="#limparFormUsuario" text="Limpar" />
+                    </HBox>
+                    <TableView fx:id="tblCrudUsuarios" VBox.vgrow="ALWAYS">
+                        <columns>
+                            <TableColumn fx:id="colCrudUserId" prefWidth="60.0" text="ID" />
+                            <TableColumn fx:id="colCrudUserNome" prefWidth="250.0" text="Nome" />
+                            <TableColumn fx:id="colCrudUserEmail" prefWidth="260.0" text="E-mail" />
+                            <TableColumn fx:id="colCrudUserPerfil" prefWidth="150.0" text="Perfil" />
+                        </columns>
+                    </TableView>
+                </VBox>
+
+            </children>
+        </StackPane>
+    </center>
+</BorderPane>

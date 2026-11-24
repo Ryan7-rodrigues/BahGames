@@ -7,25 +7,25 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
- * Classe principal aplicação
+ * Classe principal de inicialização do sistema Bah Games.
+ * 
+ * @author Ryan, Nicolas e Matheus Ryan
+ * @version 1.0
  */
 public class App extends Application {
 
     @Override
-    public void start(Stage primaryStage) {
-        try {
-            Parent root = FXMLLoader.load(getClass().getResource("/view/Principal.fxml"));
-            
-            Scene scene = new Scene(root);
-            
-            primaryStage.setScene(scene);
-            primaryStage.setTitle("Bah Games");
-            primaryStage.show();
-            
-        } catch(Exception e) {
-            e.printStackTrace();
-            System.out.println("Erro ao carregar a tela principal. Verifique o caminho do FXML.");
+    public void start(Stage primaryStage) throws Exception {
+    	dao.ConexaoBD.inicializarBanco();
+        Parent root = FXMLLoader.load(getClass().getResource("/view/LoginView.fxml"));
+        Scene scene = new Scene(root, 420, 460);
+        if (getClass().getResource("/css/style.css") != null) {
+            scene.getStylesheets().add(getClass().getResource("/css/style.css").toExternalForm());
         }
+        primaryStage.setTitle("Bah Games - Login");
+        primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
+        primaryStage.show();
     }
 
     public static void main(String[] args) {
